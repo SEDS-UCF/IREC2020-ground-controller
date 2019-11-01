@@ -15,17 +15,6 @@ server = None
 inQueue = queue.Queue()
 outQueue = queue.Queue()
 
-# def signal_handler(sig, frame):
-# 	global running, connected
-# 	running = False
-# 	if connected:
-# 		connected = False
-# 		server.close()
-# 	print('Exiting...')
-# 	time.sleep(5)
-# 	sys.exit()
-# signal.signal(signal.SIGINT, signal_handler)
-
 class TestInserter(threading.Thread):
 	def __init__(self):
 		threading.Thread.__init__(self)
