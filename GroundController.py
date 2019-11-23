@@ -26,6 +26,23 @@ outQueue = queue.Queue()
 # 	sys.exit()
 # signal.signal(signal.SIGINT, signal_handler)
 
+class distanceTester(threading.Thread):
+	def __init__(self):
+		threading.Thread.__init__(self)
+		self.cnt = 0
+
+	def run(self):
+		while running:
+			if inQueue.empty():
+				outQueue.put([69, self.cnt, ["testing", 3.14159]])
+			else:
+				outQueue.put(inQueue.get())
+			time.sleep(5)
+		print('TestInserter thread dying!')
+
+
+
+
 class TestInserter(threading.Thread):
 	def __init__(self):
 		threading.Thread.__init__(self)
@@ -92,8 +109,11 @@ if __name__ == "__main__":
 	server.listen(1)
 	print('Ground Controller initialized!')
 
-	tester = TestInserter()
-	tester.start()
+	#tester = TestInserter()
+	#tester.start()
+
+	dT = distanceTester()
+	dT.start()
 
 	qrt = QueueReader()
 	qrt.start()
